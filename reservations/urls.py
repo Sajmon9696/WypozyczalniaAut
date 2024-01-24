@@ -1,7 +1,7 @@
 from django.urls import path
 
 
-app_name = 'reservation'
+app_name = 'reservations'
 urlpatterns = [
 
 ]
