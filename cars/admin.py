@@ -1,12 +1,12 @@
 from django.contrib import admin
-import models
+from cars.models import Fuel, Color, Brand, CarClass, EngineSize, CarModel, Car
 
 # Register your models here.
 
-admin.site.register(models.Fuel)
-admin.site.register(models.Color)
-admin.site.register(models.Brand)
-admin.site.register(models.CarClass)
-admin.site.register(models.EngineSize)
-admin.site.register(models.CarModel)
-admin.site.register(models.Car)
+admin.site.register(Fuel)
+admin.site.register(Color)
+admin.site.register(Brand)
+admin.site.register(CarClass)
+admin.site.register(EngineSize)
+admin.site.register(CarModel)
+admin.site.register(Car)
