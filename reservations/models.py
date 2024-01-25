@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 from cars.models import Car
@@ -10,4 +11,4 @@ class Reservation(models.Model):
     reservation_start_date = models.DateField()
     reservation_end_date = models.DateField()
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='car_reservation')
-    user = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='user_reservation')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_reservation')

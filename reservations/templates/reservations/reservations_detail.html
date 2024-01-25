@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{ reservation }}
+
+<a href="{% url 'reservations:edit_reservation' reservation.id %}">Update</a>
+<a href="{% url 'reservations:delete_reservation' reservation.id %}">Delete</a>
+</body>
+</html>
