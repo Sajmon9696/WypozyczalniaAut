@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    {% for car in cars %}
+
+    <li>
+        {{ car.model.model_name }}
+        {{ car.color.color_name }}
+    </li>
+
+    {% endfor %}
+</ul>
+{% if user.is_authenticated %}
+<form method="post" action="{% url 'accounts:logout' %}">
+  {% csrf_token %}
+  <button type="submit">Wyloguj</button>
+</form>
+{% endif %}
+</body>
+</html>
