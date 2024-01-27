@@ -1,7 +1,7 @@
 from django.urls import path
 
-from reservations.views import CreateReservationView, ReservationListView, ReservationDetailView, ReservationUpdateView, \
-    ReservationDeleteView
+from reservations.views import ReservationListView, ReservationDetailView, ReservationUpdateView, \
+    ReservationDeleteView, CreateReservationView
 
 app_name = 'reservations'
 

@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
+from django.views import View
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 from reservations.forms import CreateReservationForm
@@ -9,13 +10,21 @@ from reservations.models import Reservation
 
 
 # Create your views here.
-
-@method_decorator(login_required, name='dispatch')
 class CreateReservationView(CreateView):
     model = Reservation
     form_class = CreateReservationForm
     template_name = 'reservations/create_reservation_form.html'
-    success_url = reverse_lazy('reservations:your_reservations')
+    context_object_name = 'form'
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            user = request.user
+            reservation = form.save(commit=False)
+            reservation.user = user
+            reservation.save()
+            return redirect('reservations:your_reservations')
+        return render(request, self.template_name, {'form': form})
 
 
 @method_decorator(login_required, name='dispatch')
