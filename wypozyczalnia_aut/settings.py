@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'cars.apps.CarsConfig',
     'reservations.apps.ReservationsConfig',
     'accounts.apps.AccountsConfig',
+    'Base_app.apps.BaseAppConfig',
 ]
 
 MIDDLEWARE = [

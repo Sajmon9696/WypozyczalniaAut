@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'Base_app/base.html' %}
+
+{% block content %}
 <form method="post" >
     {% csrf_token %}
     {{ form }}
     <button type="submit">sing up</button>
 </form>
-
-</body>
-</html>
+{% endblock %}

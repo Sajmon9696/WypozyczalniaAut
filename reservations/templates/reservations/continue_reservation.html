@@ -1,9 +1,10 @@
 {% extends 'Base_app/base.html' %}
 
 {% block content %}
-<form method="post" >
+<form method="POST" action=".">
     {% csrf_token %}
     {{ form }}
-    <button type="submit">login</button>
+    <button type="submit">Finnish reservation</button>
+
 </form>
 {% endblock %}

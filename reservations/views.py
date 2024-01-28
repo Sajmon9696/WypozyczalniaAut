@@ -5,11 +5,13 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
+from cars.models import Car
 from reservations.forms import CreateReservationForm
 from reservations.models import Reservation
 
 
 # Create your views here.
+@method_decorator(login_required, name='dispatch')
 class CreateReservationView(CreateView):
     model = Reservation
     form_class = CreateReservationForm
@@ -23,8 +25,27 @@ class CreateReservationView(CreateView):
             reservation = form.save(commit=False)
             reservation.user = user
             reservation.save()
-            return redirect('reservations:your_reservations')
+            return redirect('reservations:continue_reservation', reservation.id)
         return render(request, self.template_name, {'form': form})
+
+
+class ContinueReservation(UpdateView):
+    model = Reservation
+    template_name = 'reservations/continue_reservation.html'
+    fields = ['car']
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        reservation = self.get_object()
+        reservation_start_date = reservation.reservation_start_date
+        reservation_end_date = reservation.reservation_end_date
+
+        available_cars = Car.objects.all()
+
+        form.fields['car'].queryset = available_cars.exclude(
+            car_reservation__reservation_start_date__lte=reservation_end_date,
+            car_reservation__reservation_end_date__gte=reservation_start_date)
+        return form
 
 
 @method_decorator(login_required, name='dispatch')

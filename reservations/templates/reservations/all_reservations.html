@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'Base_app/base.html' %}
+
+{% block content %}
 <ul>
     {% for reservation in reservations %}
         <a href="{% url 'reservations:reservation_detail' reservation.id %}">{{ reservation }}</a>
@@ -12,5 +8,4 @@
 </ul>
 
 
-</body>
-</html>
+{% endblock %}

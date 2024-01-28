@@ -1,0 +1,15 @@
+{% extends 'Base_app/base.html' %}
+
+{% block content %}
+<form method="get" action="{% url 'cars:filter_cars' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Fileter</button>
+</form>
+
+{% for car in cars %}
+<h3>{{ car }}</h3>
+{% endfor %}
+
+
+{% endblock %}
