@@ -1,3 +1,13 @@
+/*
+.inter-<uniquifier> {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0;
+}
+*/
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -31,12 +41,12 @@ nav ul li {
 
 nav a {
   text-decoration: none;
-  color: #ffde59;
+  color: rgba(255,222,89, 0.6); /* #ffde59 */
   font-weight: bold;
 }
 
 nav a:hover {
-    color: #ff3131
+    color: rgba(255, 49, 49, 0.6); /* #ff3131 */
     }
 
 h3 {
@@ -80,4 +90,33 @@ h3 {
     grid-gap: 20px;
 }
 
+.widgetboxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
 
+.widgetbox-title {
+    grid-column: span 2;
+    background-color: rgba(255, 222, 89, 0.6);
+    border: 2px solid rgba(255, 222, 89, 1);
+    border-radius: 2px;
+    padding: 5px;
+    box-shadow: 0 4px 8px rgba(255, 222, 89, 0.1);
+    color: #fff;
+    font-family: "Black Ops One", sans-serif;
+    font-optical-sizing: auto;
+/*    font-weight: */;
+    font-style: normal;
+    font-variation-settings:
+    "slnt" 0;
+}
+
+.widgetbox {
+    background-color: rgba(255, 222, 89, 0.6);
+    border: 1px solid rgba(255, 222, 89, 1);
+    border-radius: 2px;
+    padding: 5px;
+    box-shadow: 0 4px 8px rgba(255, 222, 89, 0.1);
+    color: #fff;
+}
