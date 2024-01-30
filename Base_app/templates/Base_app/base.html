@@ -1,11 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style2.css' %}">
+    <title>Wypożyczalnia Samochodów</title>
 </head>
 <body>
-{% block content %}{% endblock %}
+<header>
+    <h1>Wypożyczalnia Samochodów</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'Base_app:main' %}">Strona Główna</a></li>
+            <li><a href="{% url 'cars:all_cars' %}">Oferta</a></li>
+            <li><a href="#">Kontakt</a></li>
+        </ul>
+    </nav>
+</header>
 
+
+<section class="reservation-section">
+    <h2>Rezerwacja Samochodu</h2>
+    <form action="#" method="post" class="reservation-form">
+
+        <label for="pickup-date">Data Odbioru:</label>
+        <input type="date" id="pickup-date" name="pickup-date" required>
+
+        <label for="return-date">Data Zwrotu:</label>
+        <input type="date" id="return-date" name="return-date" required>
+
+        <button type="submit">Zarezerwuj Samochód</button>
+    </form>
+</section>
+
+<section class="main-section">
+    <h2>Oferta Samochodów</h2>
+    <div class="car-listing">
+        <div class="car-image">
+            <img src="path/to/car-image.jpg" alt="Car Image">
+        </div>
+        <div class="car-details">
+            <h3>Nazwa Samochodu</h3>
+            <p>Rok Produkcji: 2022</p>
+            <p>Klasa: Kompakt</p>
+            <p>Dostępność: Dostępny</p>
+            <button>Zarezerwuj</button>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+</section>
+
+<footer>
+    <p>&copy; 2024 Wypożyczalnia Samochodów. Wszelkie prawa zastrzeżone.</p>
+</footer>
 </body>
 </html>

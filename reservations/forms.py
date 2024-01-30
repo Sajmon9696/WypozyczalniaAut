@@ -10,8 +10,3 @@ class CreateReservationForm(ModelForm):
         model = Reservation
         fields = ['reservation_start_date', 'reservation_end_date']
 
-
-class CarFilterForm(ModelForm):
-    class Meta:
-        model = Car
-        fields = ['model', 'fuel', 'engine_size', 'color']

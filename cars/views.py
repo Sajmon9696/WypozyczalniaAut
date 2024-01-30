@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView
 from cars.models import Car
-from reservations.forms import CarFilterForm
+from cars.forms import CarFilterForm
 
 
 # Create your views here.
@@ -23,7 +23,7 @@ class ShowCarDetailView(DetailView):
 class CarFilterView(View):
     template_name = 'cars/filter_cars.html'
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         form = CarFilterForm(request.GET)
         cars = Car.objects.all()
 
@@ -43,6 +43,10 @@ class CarFilterView(View):
             color = form.cleaned_data.get('color')
             if color:
                 cars = cars.filter(color=color)
+
+            car_class = form.cleaned_data.get('car_class')
+            if color:
+                cars = cars.filter(car_class=car_class)
 
         context = {'form': form, 'cars': cars}
 
