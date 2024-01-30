@@ -16,10 +16,7 @@
             <li><a href="{% url 'cars:all_cars' %}">Oferta</a></li>
             <li><a href="#">Kontakt</a></li>
             {% if user.is_authenticated %}
-            <li><form method="post" action="{% url 'accounts:logout' %}">
-                {% csrf_token %}
-                <button type="submit">Wyloguj</button>
-            </form></li>
+            <li><a href="{% url 'accounts:logout' %}">Wyloguj</a></li>
             {% else %}
             <li><a href="{% url 'accounts:login' %}">login</a></li>
             <li><a href="{% url 'accounts:register_user' %}">sign up</a></li>
