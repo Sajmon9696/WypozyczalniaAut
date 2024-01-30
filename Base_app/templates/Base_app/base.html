@@ -20,36 +20,7 @@
 </header>
 
 
-<section class="reservation-section">
-    <h2>Rezerwacja Samochodu</h2>
-    <form action="#" method="post" class="reservation-form">
-
-        <label for="pickup-date">Data Odbioru:</label>
-        <input type="date" id="pickup-date" name="pickup-date" required>
-
-        <label for="return-date">Data Zwrotu:</label>
-        <input type="date" id="return-date" name="return-date" required>
-
-        <button type="submit">Zarezerwuj Samochód</button>
-    </form>
-</section>
-
-<section class="main-section">
-    <h2>Oferta Samochodów</h2>
-    <div class="car-listing">
-        <div class="car-image">
-            <img src="path/to/car-image.jpg" alt="Car Image">
-        </div>
-        <div class="car-details">
-            <h3>Nazwa Samochodu</h3>
-            <p>Rok Produkcji: 2022</p>
-            <p>Klasa: Kompakt</p>
-            <p>Dostępność: Dostępny</p>
-            <button>Zarezerwuj</button>
-        </div>
-    </div>
-    {% block content %}{% endblock %}
-</section>
+{% block content %}{% endblock %}
 
 <footer>
     <p>&copy; 2024 Wypożyczalnia Samochodów. Wszelkie prawa zastrzeżone.</p>

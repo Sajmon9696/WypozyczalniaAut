@@ -5,16 +5,23 @@
     {% for car in cars %}
 
     <li>
-        {{ car.model.model_name }}
-        {{ car.color.color_name }}
-    </li>
+        <section class="main-section">
+            <h2>Oferta Samochodów</h2>
+            <div class="car-listing">
+                <div class="car-image">
+                    <img src="path/to/car-image.jpg" alt="Car Image">
+                </div>
+                <div class="car-details">
+                    <h3>{{ car.model.model_name }}</h3>
+                    <h3>{{ car.color.color_name }}</h3>
+                    <p>Rok Produkcji: 2022</p>
+                    <p>Klasa: Kompakt</p>
+                    <p>Dostępność: Dostępny</p>
+                    <button>Zarezerwuj</button>
+                </div>
+            </div>
 
+    </li>
     {% endfor %}
 </ul>
-{% if user.is_authenticated %}
-<form method="post" action="{% url 'accounts:logout' %}">
-  {% csrf_token %}
-  <button type="submit">Wyloguj</button>
-</form>
-{% endif %}
 {% endblock %}
