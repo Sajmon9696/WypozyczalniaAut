@@ -9,7 +9,9 @@
 </head>
 <body>
 <header>
-    <h1>Wypożyczalnia Samochodów</h1>
+<!--    <h1>Wypożyczalnia Samochodów</h1>
+-->
+        <img src="static/img/logo.png" width="800" height="140">
     <nav>
         <ul>
             <li><a href="{% url 'Base_app:main' %}">Strona Główna</a></li>
@@ -29,7 +31,28 @@
 {% block content %}{% endblock %}
 
 <footer>
-    <p>&copy; 2024 Wypożyczalnia Samochodów. Wszelkie prawa zastrzeżone.</p>
+    <div class="footer-content">
+        <div class="company-info">
+            <h3>HS Car Shere Sp z łoło</h3>
+            <p>ul. Złota 44</p>
+            <p>00-120 Warszawa</p>
+            <p>NIP PL: 555 111 22 22</p>
+            <p>REGON: 123456789</p>
+            <p>@: <a href="mailto:biuro@hscarshare.com">biuro@hscarshare.com</a></p>
+            <!-- to możemy też napisać jako zgłoszenie napisania formularza na emel-->
+        </div>
+        <div class="callcenter">
+            <h3>Całodobowe 24/7 Callcenter</h3>
+            <p>0-700-789-789</p>
+            <p>Koszt połączenia zależnie od operatora</p>
+        </div>
+        <div class="links">
+            <p> tu bedo lynki jeszcze przydatne, albo co inne. Pomyśle jak pośpie itd. </p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2024 HS Car Share. Wszelkie prawa zastrzeżone i pamiętaj... wsiadasz i jedziesz jak Gość!
+    </div>
 </footer>
 </body>
 </html>
