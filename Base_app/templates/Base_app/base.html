@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="pl">
+<html lang="pl" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,88 +9,97 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Inter:wght@100..900&family=Montserrat:ital,wght@1,100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Inter:wght@100..900&family=Montserrat:ital,wght@1,100&display=swap"
+          rel="stylesheet">
 </head>
 <body>
 <div class="container">
-<header>
-<!--    <h1>Wypożyczalnia Samochodów</h1>
--->
+    <header>
+        <!--    <h1>Wypożyczalnia Samochodów</h1>
+        -->
         <img src="static/img/logo.png" width="800" height="140">
-    <nav>
-        <ul>
-            <li><a href="{% url 'Base_app:main' %}">Strona Główna</a></li>
-            <li><a href="{% url 'cars:all_cars' %}">Oferta</a></li>
-            <li><a href="{% url 'cars:filter_cars' %}">cars filter</a></li>
-            <li><a href="#">Kontakt</a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'accounts:logout' %}">Wyloguj</a></li>
-            <li><a href="{% url 'reservations:create_reservation' %}">crate reservation</a></li>
-            <li><a href="{% url 'reservations:your_reservations' %}">your reservation</a></li>
-            {% else %}
-            <li><a href="{% url 'accounts:login' %}">login</a></li>
-            <li><a href="{% url 'accounts:register_user' %}">sign up</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-</header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'Base_app:main' %}">Strona Główna</a></li>
+                <li><a href="{% url 'cars:all_cars' %}">Oferta</a></li>
+                <li><a href="{% url 'cars:filter_cars' %}">cars filter</a></li>
+                <li><a href="#">Kontakt</a></li>
+                {% if user.is_authenticated %}
+                <li>
+                    <form style="display:inline" action="{% url 'accounts:logout' %}" method="POST">{% csrf_token %}<input type="submit" value="Wyloguj">
+                    </form>
+                </li>
+                <li><a href="{% url 'reservations:create_reservation' %}">crate reservation</a></li>
+                <li><a href="{% url 'reservations:your_reservations' %}">your reservation</a></li>
+                {% else %}
+                <li><a href="{% url 'accounts:login' %}">login</a></li>
+                <li><a href="{% url 'accounts:register_user' %}">sign up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
 
 
-{% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 
-<footer>
-    <div class="footer-content">
-        <div class="company-info">
-            <h3>HS Car Shere Sp z łoło</h3>
-            <p>ul. Złota 44</p>
-            <p>00-120 Warszawa</p>
-            <p>NIP PL: 555 111 22 22</p>
-            <p>REGON: 123456789</p>
-            <p>@: <a href="mailto:biuro@hscarshare.com">biuro@hscarshare.com</a></p>
-            <!-- to możemy też napisać jako zgłoszenie napisania formularza na emel-->
+    <footer>
+        <div class="footer-content">
+            <div class="company-info">
+                <h3>HS Car Shere Sp z łoło</h3>
+                <p>ul. Złota 44</p>
+                <p>00-120 Warszawa</p>
+                <p>NIP PL: 555 111 22 22</p>
+                <p>REGON: 123456789</p>
+                <p>@: <a href="mailto:biuro@hscarshare.com">biuro@hscarshare.com</a></p>
+                <!-- to możemy też napisać jako zgłoszenie napisania formularza na emel-->
+            </div>
+            <div class="callcenter">
+                <h3>Całodobowe 24/7 Callcenter</h3>
+                <p>0-700-789-789</p>
+                <p>Koszt połączenia zależnie od operatora</p>
+            </div>
+            <div class="widgetboxes">
+                <div class="widgetbox-title">
+                    <strong>Obsługa rezerwacji long</strong>
+                    <ul>
+                        <li><a href="mailto:rezerwacja@hscarshare.com" title="rezerwacja@hscarshare.com">rezerwacja@carshare.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="widgetbox">
+                    <strong>Obsługa rezerwacji</strong>
+                    <ul>
+                        <li><a href="mailto:rezerwacja@hscarshare.com" title="rezerwacja@hscarshare.com">rezerwacja@carshare.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="widgetbox">
+                    <strong>Obsługa rezerwacji 2</strong>
+                    <ul>
+                        <li><a href="mailto:rezerwacja@hscarshare.com" title="rezerwacja@hscarshare.com">rezerwacja@carshare.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="widgetbox">
+                    <strong>Obsługa rezerwacji 3</strong>
+                    <ul>
+                        <li><a href="mailto:rezerwacja@hscarshare.com" title="rezerwacja@hscarshare.com">rezerwacja@carshare.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="widgetbox">
+                    <strong>Obsługa rezerwacji 4</strong>
+                    <ul>
+                        <li><a href="mailto:rezerwacja@hscarshare.com" title="rezerwacja@hscarshare.com">rezerwacja@carshare.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="callcenter">
-            <h3>Całodobowe 24/7 Callcenter</h3>
-            <p>0-700-789-789</p>
-            <p>Koszt połączenia zależnie od operatora</p>
+        <div class="footer-bottom">
+            &copy; 2024 HS Car Share. Wszelkie prawa zastrzeżone i pamiętaj... wsiadasz i jedziesz jak Gość!
         </div>
-        <div class="widgetboxes">
-            <div class="widgetbox-title">
-            <strong>Obsługa rezerwacji long</strong>
-            <ul>
-              <li><a href="mailto:rezerwacja@hscarshare.com" title="rezerwacja@hscarshare.com">rezerwacja@carshare.com</a></li>
-            </ul>
-            </div>
-            <div class="widgetbox">
-            <strong>Obsługa rezerwacji</strong>
-            <ul>
-              <li><a href="mailto:rezerwacja@hscarshare.com" title="rezerwacja@hscarshare.com">rezerwacja@carshare.com</a></li>
-            </ul>
-            </div>
-            <div class="widgetbox">
-            <strong>Obsługa rezerwacji 2</strong>
-            <ul>
-              <li><a href="mailto:rezerwacja@hscarshare.com" title="rezerwacja@hscarshare.com">rezerwacja@carshare.com</a></li>
-            </ul>
-            </div>
-            <div class="widgetbox">
-            <strong>Obsługa rezerwacji 3</strong>
-            <ul>
-              <li><a href="mailto:rezerwacja@hscarshare.com" title="rezerwacja@hscarshare.com">rezerwacja@carshare.com</a></li>
-            </ul>
-            </div>
-            <div class="widgetbox">
-            <strong>Obsługa rezerwacji 4</strong>
-            <ul>
-              <li><a href="mailto:rezerwacja@hscarshare.com" title="rezerwacja@hscarshare.com">rezerwacja@carshare.com</a></li>
-            </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        &copy; 2024 HS Car Share. Wszelkie prawa zastrzeżone i pamiętaj... wsiadasz i jedziesz jak Gość!
-    </div>
-</footer>
+    </footer>
 </div>
 </body>
 </html>

@@ -44,9 +44,9 @@ class CarFilterView(View):
             if color:
                 cars = cars.filter(color=color)
 
-            car_class = form.cleaned_data.get('car_class')
-            if color:
-                cars = cars.filter(car_class=car_class)
+            # car_class = form.cleaned_data.get('car_class')
+            # if color:
+            #     cars = cars.filter(car_class=car_class)
 
         context = {'form': form, 'cars': cars}
 
