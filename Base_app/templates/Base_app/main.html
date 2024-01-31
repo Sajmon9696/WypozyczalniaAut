@@ -1,28 +1,63 @@
 {% extends 'Base_app/base.html' %}
 
 {% block content %}
+
+{% if user.is_authenticated %}
 <section class="reservation-section">
     <h2>Rezerwacja Samochodu</h2>
-    <form action="#" method="post" class="reservation-form">
-
+    <form action="{% url 'reservations:create_reservation' %}" method="post" class="reservation-form">
+        {% csrf_token %}
         <label for="pickup-date">Data Odbioru:</label>
-        <input type="date" id="pickup-date" name="pickup-date" required>
+        {{ form.reservation_start_date }}
+
 
         <label for="return-date">Data Zwrotu:</label>
-        <input type="date" id="return-date" name="return-date" required>
+        {{ form.reservation_end_date }}
 
         <button type="submit">Zarezerwuj Samochód</button>
     </form>
 </section>
-
-
-<a href="">cars</a>
-<a href="{% url 'cars:filter_cars' %}">cars filter</a>
-{% if user.is_authenticated %}
-<a href="{% url 'reservations:create_reservation' %}">crate reservation</a>
 {% else %}
+<section class="reservation-section">
+    <h2>Zaloguj by zlozyc rejestracje</h2>
+    <form action="{% url 'accounts:login' %}" method="post" class="reservation-form">
+        {% csrf_token %}
+        <label for="pickup-date">Login:</label>
+        {{ login_form.username }}
 
 
+        <label for="return-date">Password:</label>
+        {{ login_form.password }}
+
+        <button type="submit">Login</button>
+    </form>
+</section>
 {% endif %}
+<ul>
+    {% for car in cars %}
+    <li>
+        <section class="main-section">
+            <h2>Oferta Samochodów</h2>
+            <div class="car-listing">
+                <div class="car-image">
+                    <img src="path/to/car-image.jpg" alt="Car Image">
+                </div>
+                <div class="car-details">
+                    <h3>{{ car.model.model_name }}</h3>
+                    <h3>{{ car.color.color_name }}</h3>
+                    <p>Rok Produkcji: 2022</p>
+                    <p>Klasa: Kompakt</p>
+                    <p>Dostępność: Dostępny</p>
+                    <button>Zarezerwuj</button>
+                </div>
+            </div>
+        </section>
+    </li>
+
+
+    {% endfor %}
+
+</ul>
+
 
 {% endblock %}

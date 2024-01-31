@@ -21,9 +21,12 @@
         <ul>
             <li><a href="{% url 'Base_app:main' %}">Strona Główna</a></li>
             <li><a href="{% url 'cars:all_cars' %}">Oferta</a></li>
+            <li><a href="{% url 'cars:filter_cars' %}">cars filter</a></li>
             <li><a href="#">Kontakt</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'accounts:logout' %}">Wyloguj</a></li>
+            <li><a href="{% url 'reservations:create_reservation' %}">crate reservation</a></li>
+            <li><a href="{% url 'reservations:your_reservations' %}">your reservation</a></li>
             {% else %}
             <li><a href="{% url 'accounts:login' %}">login</a></li>
             <li><a href="{% url 'accounts:register_user' %}">sign up</a></li>

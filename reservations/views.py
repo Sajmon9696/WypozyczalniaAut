@@ -33,6 +33,7 @@ class ContinueReservation(UpdateView):
     model = Reservation
     template_name = 'reservations/continue_reservation.html'
     fields = ['car']
+    success_url = reverse_lazy('reservations:your_reservations')
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
