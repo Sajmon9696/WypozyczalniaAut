@@ -1,3 +1,5 @@
+
+
 {% extends 'Base_app/base.html' %}
 
 {% block content %}
@@ -33,31 +35,25 @@
     </form>
 </section>
 {% endif %}
-<ul>
+
+<div class="car-container">
     {% for car in cars %}
-    <li>
-        <section class="main-section">
-            <h2>Oferta Samochodów</h2>
-            <div class="car-listing">
-                <div class="car-image">
-                    <img src="path/to/car-image.jpg" alt="Car Image">
-                </div>
-                <div class="car-details">
-                    <h3>{{ car.model.model_name }}</h3>
-                    <h3>{{ car.color.color_name }}</h3>
-                    <p>Rok Produkcji: 2022</p>
-                    <p>Klasa: Kompakt</p>
-                    <p>Dostępność: Dostępny</p>
-                    <button>Zarezerwuj</button>
-                </div>
+        <div class="widget-car">
+            <div classs="car-image">
+                <img src="static/img/car.jpg" alt="Wsiadasz, jedziesz... jak gość">
             </div>
-        </section>
-    </li>
-
-
+            <div class="car-details">
+                <h2>{{ car.model }}</h2>
+                <h2>{{ car.color.color_name }}</h2>
+                <p>Silnik: {{ car.engine_size }} {{ car.fuel }}</p>
+                <p>Klasa: {{ carmodel.car_class }}</p>
+                <p>Dostępność: </p>
+                <button>Zarezerwuj</button>
+            </div>
+        </div>
     {% endfor %}
+</div>
 
-</ul>
 
 
 {% endblock %}

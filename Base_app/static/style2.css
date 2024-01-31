@@ -93,6 +93,8 @@ h3 {
 
 .main-section, .reservation-section {
   margin: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
 }
 
 .reservation-form {
@@ -158,4 +160,26 @@ h3 {
     padding: 5px;
     box-shadow: 0 4px 8px rgba(255, 222, 89, 0.1);
     color: #fff;
+}
+
+.car-container {
+/*    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px; */
+    display: flex;
+    justify-content: space-around;
+}
+
+.widget-car {
+    background-color: rgba(255, 222, 89, 0.6);
+    border: 1px solid rgba(255, 222, 89, 1);
+    border-radius: 2px;
+    padding: 5px;
+    box-shadow: 0 4px 8px rgba(255, 222, 89, 0.1);
+    color: black;
+    width: 350px;
+/*    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px; */
+}
+
+.top-description {
 }

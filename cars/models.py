@@ -31,7 +31,7 @@ class CarModel(models.Model):
     model_name = models.CharField(max_length=64)
     car_class = models.ForeignKey(CarClass, on_delete=models.CASCADE)
     car_brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
-    def __str__(self): return f'{self.car_brand}{self.model_name}'
+    def __str__(self): return f'{self.car_brand} {self.model_name}'
 
 
 class Car(models.Model):
