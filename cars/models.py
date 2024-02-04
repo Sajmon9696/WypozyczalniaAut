@@ -39,4 +39,5 @@ class Car(models.Model):
     fuel = models.ForeignKey(Fuel, on_delete=models.CASCADE)
     engine_size = models.ForeignKey(EngineSize, on_delete=models.CASCADE)
     color = models.ForeignKey(Color, on_delete=models.CASCADE)
+    # pic = models.ImageField(upload_to='img/')
     def __str__(self): return f'{self.model}'
