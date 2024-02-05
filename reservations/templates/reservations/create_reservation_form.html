@@ -1,8 +1,16 @@
 {% extends 'Base_app/base.html' %}
 {% block content %}
-<form method="POST" action=".">
+{% if error %}
+<p>{{error}}</p>
+{% endif %}
+<form method="POST"  class="reservation-form">
     {% csrf_token %}
-    {{ form }}
+    <label for="pickup-date">Data Odbioru:</label>
+    {{ form.reservation_start_date }}
+
+
+    <label for="return-date">Data Zwrotu:</label>
+    {{ form.reservation_end_date }}
     <button type="submit">ADD reservation</button>
 
 </form>

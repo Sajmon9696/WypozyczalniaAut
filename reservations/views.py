@@ -1,12 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 from cars.models import Car
 from reservations.forms import CreateReservationForm
+
 from reservations.models import Reservation
 
 
@@ -23,6 +25,11 @@ class CreateReservationView(CreateView):
         if form.is_valid():
             user = request.user
             reservation = form.save(commit=False)
+            if reservation.reservation_start_date < timezone.now().date() or \
+                    reservation.reservation_end_date < timezone.now().date() or \
+                    reservation.reservation_start_date > reservation.reservation_end_date:
+                error = "Podana Data Jest nieprawidlowa"
+                return render(request, self.template_name, {'form': form, 'error': error})
             reservation.user = user
             reservation.save()
             return redirect('reservations:continue_reservation', reservation.id)
@@ -68,12 +75,26 @@ class ReservationDetailView(DetailView):
     context_object_name = 'reservation'
 
 
-@method_decorator(login_required, name='dispatch')
 class ReservationUpdateView(UpdateView):
     model = Reservation
+    form_class = CreateReservationForm
     template_name = 'reservations/create_reservation_form.html'
     context_object_name = 'form'
-    fields = ['reservation_start_date', 'reservation_end_date', 'car']
+    success_url = reverse_lazy('reservations:your_reservations')
+
+    def post(self, request, *args, **kwargs):
+        instance = self.get_object()
+        form = self.form_class(request.POST, instance=instance)
+        if form.is_valid():
+            reservation = form.save(commit=False)
+            if reservation.reservation_start_date < timezone.now().date() or \
+                    reservation.reservation_end_date < timezone.now().date() or \
+                    reservation.reservation_start_date > reservation.reservation_end_date:
+                error = "Podana Data Jest nieprawidlowa"
+                return render(request, self.template_name, {'form': form, 'error': error})
+            reservation.save()
+            return redirect(self.success_url, pk=reservation.id)
+        return render(request, self.template_name, {'form': form})
 
 
 @method_decorator(login_required, name='dispatch')
