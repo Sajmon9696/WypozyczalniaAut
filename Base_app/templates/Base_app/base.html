@@ -17,23 +17,22 @@
     <header>
         <!--    <h1>Wypożyczalnia Samochodów</h1>
         -->
-        <img src="static/img/logo.png" width="800" height="140">
+        <img src="{% static 'img/logo.png' %}" width="800" height="140">
         <nav>
             <ul>
                 <li><a href="{% url 'Base_app:main' %}">Strona Główna</a></li>
                 <li><a href="{% url 'cars:all_cars' %}">Oferta</a></li>
-                <li><a href="{% url 'cars:filter_cars' %}">cars filter</a></li>
+                <li><a href="{% url 'cars:filter_cars' %}">Znajdź pojazd</a></li>
                 <li><a href="#">Kontakt</a></li>
                 {% if user.is_authenticated %}
-                <li>
-                    <form style="display:inline" action="{% url 'accounts:logout' %}" method="POST">{% csrf_token %}<input type="submit" value="Wyloguj">
-                    </form>
-                </li>
-                <li><a href="{% url 'reservations:create_reservation' %}">crate reservation</a></li>
-                <li><a href="{% url 'reservations:your_reservations' %}">your reservation</a></li>
+
+                <li><a href="{% url 'reservations:create_reservation' %}">Zarezerwuj pojazd</a></li>
+                <li><a href="{% url 'reservations:your_reservations' %}">Moje rezerwacje</a></li>
+                <li><form style="display:inline" action="{% url 'accounts:logout' %}" method="POST">{% csrf_token %}<input type="submit" value="Wyloguj">
+                    </form> </li>
                 {% else %}
-                <li><a href="{% url 'accounts:login' %}">login</a></li>
-                <li><a href="{% url 'accounts:register_user' %}">sign up</a></li>
+                <li><a href="{% url 'accounts:login' %}">Zaloguj</a></li>
+                <li><a href="{% url 'accounts:register_user' %}">Stwórz konto</a></li>
                 {% endif %}
             </ul>
         </nav>
@@ -55,6 +54,7 @@
             </div>
             <div class="callcenter">
                 <h3>Całodobowe 24/7 Callcenter</h3>
+                <p><img src="{% static 'img/callcenter.jpeg' %}" width="300"></p>
                 <p>0-700-789-789</p>
                 <p>Koszt połączenia zależnie od operatora</p>
             </div>

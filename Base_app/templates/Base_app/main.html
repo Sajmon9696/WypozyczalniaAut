@@ -1,6 +1,10 @@
+
+
 {% extends 'Base_app/base.html' %}
 
 {% block content %}
+
+
 
 {% if user.is_authenticated %}
 
@@ -37,19 +41,19 @@
 
 <div class="car-container">
     {% for car in cars %}
-    <div class="widget-car">
-        <div class="car-image">
-            <img src="static/img/car.jpg" alt="Wsiadasz, jedziesz... jak gość">
+        <div class="widget-car">
+            <div class="car-image">
+                <img src="static/img/car.jpg" alt="Wsiadasz, jedziesz... jak gość">
+            </div>
+            <div class="car-details">
+                <h2>{{ car.model }}</h2>
+                <h2>{{ car.color.color_name }}</h2>
+                <p>Silnik: {{ car.engine_size }} {{ car.fuel }}</p>
+                <p>Klasa: {{ car.model.car_class }}</p>
+                <p>Dostępność: </p>
+                <button>Zarezerwuj</button>
+            </div>
         </div>
-        <div class="car-details">
-            <h2>{{ car.model }}</h2>
-            <h2>{{ car.color.color_name }}</h2>
-            <p>Silnik: {{ car.engine_size }} {{ car.fuel }}</p>
-            <p>Klasa: {{ car.model.car_class }}</p>
-            <p>Dostępność: </p>
-            <button>Zarezerwuj</button>
-        </div>
-    </div>
     {% endfor %}
 </div>
 <section class="workspace"><div>
