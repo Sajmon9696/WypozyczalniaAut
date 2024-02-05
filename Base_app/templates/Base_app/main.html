@@ -4,12 +4,7 @@
 
 {% block content %}
 
-<section class="workspace"><div>
-    <h2>Nasza lokalizacja</h2>
-    <p>Jeżeli nie jesteś blisko - nie martw się! Przywozimy nasze samochody do Klienta!</p>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d610.9180962726817!2d21.00173376971237!3d52.23116969824918!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecc8c49633d1d%3A0xaa349f21569c205!2sTower%2C%20Z%C5%82ota%2044%2C%20Z%C5%82ota%2044%2C%2000-120%20Warszawa!5e0!3m2!1spl!2spl!4v1707072645256!5m2!1spl!2spl" width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-</div></section>
 
 {% if user.is_authenticated %}
 
@@ -62,6 +57,11 @@
     {% endfor %}
 </div>
 
+<section class="workspace"><div>
+    <h2>Nasza lokalizacja</h2>
+    <p>Jeżeli nie jesteś blisko - nie martw się! Przywozimy nasze samochody do Klienta!</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d610.9180962726817!2d21.00173376971237!3d52.23116969824918!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecc8c49633d1d%3A0xaa349f21569c205!2sTower%2C%20Z%C5%82ota%2044%2C%20Z%C5%82ota%2044%2C%2000-120%20Warszawa!5e0!3m2!1spl!2spl!4v1707072645256!5m2!1spl!2spl" width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
+</div></section>
 
 {% endblock %}
