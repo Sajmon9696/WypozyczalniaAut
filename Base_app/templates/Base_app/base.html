@@ -28,7 +28,8 @@
 
                 <li><a href="{% url 'reservations:create_reservation' %}">Zarezerwuj pojazd</a></li>
                 <li><a href="{% url 'reservations:your_reservations' %}">Moje rezerwacje</a></li>
-                <li><a href="{% url 'accounts:logout' %}" method="POST">Wyloguj</a> </li>
+                <li><form style="display:inline" action="{% url 'accounts:logout' %}" method="POST">{% csrf_token %}<input type="submit" value="Wyloguj">
+                    </form> </li>
                 {% else %}
                 <li><a href="{% url 'accounts:login' %}">Zaloguj</a></li>
                 <li><a href="{% url 'accounts:register_user' %}">Stwórz konto</a></li>
