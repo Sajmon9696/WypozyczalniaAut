@@ -41,3 +41,4 @@ class Car(models.Model):
     color = models.ForeignKey(Color, on_delete=models.CASCADE)
     pic = models.ImageField(upload_to='img/', null=True, blank=True)
     def __str__(self): return f'{self.model}'
+

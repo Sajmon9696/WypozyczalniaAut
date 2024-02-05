@@ -1,7 +1,5 @@
-
-
 {% extends 'Base_app/base.html' %}
-
+{% load static %}
 {% block content %}
 
 
@@ -38,12 +36,16 @@
     </form>
 </section>
 {% endif %}
-
+<!--
 <div class="car-container">
     {% for car in cars %}
         <div class="widget-car">
             <div class="car-image">
-                <img src="static/img/car.jpg" alt="Wsiadasz, jedziesz... jak gość">
+                {% if car.pic %}
+                <img src="{{ car.pic.url }}" alt="Jedziesz jak gość!" width="330">
+                {% else %}
+                <img src="{% static 'img/photographer.png' %}" alt="Zara Zosia zrobi" width="330">
+                {% endif %}
             </div>
             <div class="car-details">
                 <h2>{{ car.model }}</h2>
@@ -56,6 +58,30 @@
         </div>
     {% endfor %}
 </div>
+-->
+<div class="car-container">
+    {% for car in random_cars %}
+        <div class="widget-car">
+            <div class="car-image">
+                {% if car.pic %}
+                    <img src="{{ car.pic.url }}" alt="Jedziesz jak gość!" width="330">
+                {% else %}
+                    <img src="{% static 'img/photographer.png' %}" alt="Zara Zosia zrobi" width="330">
+                {% endif %}
+            </div>
+            <div class="car-details">
+                <h2>{{ car.model }}</h2>
+                <h2>{{ car.color.color_name }}</h2>
+                <p>Silnik: {{ car.engine_size }} {{ car.fuel }}</p>
+                <p>Klasa: {{ car.model.car_class }}</p>
+                <p>Dostępność: </p>
+                <button>Zarezerwuj</button>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
 <section class="workspace"><div>
     <h2>Nasza lokalizacja</h2>
     <p>Jeżeli nie jesteś blisko - nie martw się! Przywozimy nasze samochody do Klienta!</p>

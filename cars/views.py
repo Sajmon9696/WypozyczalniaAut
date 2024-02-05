@@ -4,14 +4,22 @@ from django.views.generic import ListView, DetailView
 from cars.models import Car
 from cars.forms import CarFilterForm
 
-
+from django.shortcuts import render
+from .models import CarModel, Car
 # Create your views here.
+def my_view(request):
+    cars_a = Car.objects.filter(model__car_class_id="A")
+    return render(request, 'cars/all_cars.html', {'cars_a': cars_a})
 
 
 class ShowCarsView(ListView):
     model = Car
     template_name = "cars/all_cars.html"
     context_object_name = 'cars'
+
+    def my_view(request):
+        cars_a = Car.objects.filter(model__car_class_id=1)
+        return render(request, 'cars/all_cars.html', {'cars_a': cars_a})
 
 
 class ShowCarDetailView(DetailView):
@@ -51,3 +59,4 @@ class CarFilterView(View):
         context = {'form': form, 'cars': cars}
 
         return render(request, self.template_name, context)
+
