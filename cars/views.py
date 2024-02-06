@@ -1,12 +1,15 @@
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView
-from cars.models import Car
+from cars.models import Car, CarClass
 from cars.forms import CarFilterForm
 
 from django.shortcuts import render
 from .models import CarModel, Car
+
+
 # Create your views here.
+
 def my_view(request):
     cars_a = Car.objects.filter(model__car_class_id="A")
     return render(request, 'cars/all_cars.html', {'cars_a': cars_a})
@@ -17,9 +20,15 @@ class ShowCarsView(ListView):
     template_name = "cars/all_cars.html"
     context_object_name = 'cars'
 
-    def my_view(request):
-        cars_a = Car.objects.filter(model__car_class_id=1)
-        return render(request, 'cars/all_cars.html', {'cars_a': cars_a})
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.order_by('model__car_class')
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['car_classes'] = CarClass.objects.all()
+        return context
 
 
 class ShowCarDetailView(DetailView):
@@ -52,11 +61,10 @@ class CarFilterView(View):
             if color:
                 cars = cars.filter(color=color)
 
-            # car_class = form.cleaned_data.get('car_class')
-            # if color:
-            #     cars = cars.filter(car_class=car_class)
+            car_class = form.cleaned_data.get('car_class')
+            if car_class:
+                cars = cars.filter(model__car_class=car_class)
 
         context = {'form': form, 'cars': cars}
 
         return render(request, self.template_name, context)
-
