@@ -29,9 +29,12 @@
     {% endfor %}
 </div>
 -->
+
+<!--
 <div class="car-container">
     {% for car_class in car_classes %}
     <h2>Klasa {{car_class}}</h2>
+
     {% for car in cars %}
     {% if car.model.car_class == car_class %}
     <div class="widget-car">
@@ -53,8 +56,42 @@
     </div>
     {% endif %}
     {% endfor %}
+    </p>
     {% endfor %}
 </div>
+-->
+
+<div class="car-container">
+    {% for car_class in car_classes %}
+    <div><h2>Klasa {{ car_class }}</h2></div>
+    <div class="class-container">
+        {% for car in cars %}
+        {% if car.model.car_class == car_class %}
+        <div class="widget-car">
+            <div class="car-image">
+                {% if car.pic %}
+                <img src="{{ car.pic.url }}" alt="Jedziesz jak gość!" width="330">
+                {% else %}
+                <img src="{% static 'img/photographer.png' %}" alt="Zara Zosia zrobi" width="330">
+                {% endif %}
+            </div>
+            <div class="car-details">
+                <h2>{{ car.model }}</h2>
+                <h2>{{ car.color.color_name }}</h2>
+                <p>Silnik: {{ car.engine_size }} {{ car.fuel }}</p>
+                <p>Klasa: {{ car.model.car_class }}</p>
+                <p>Dostępność: </p>
+                <button>Zarezerwuj</button>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    </div>
+    {% endfor %}
+</div>
+
+
 
 
 {% endblock %}
