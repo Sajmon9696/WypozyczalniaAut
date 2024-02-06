@@ -17,15 +17,17 @@ body {
 
 .container {
     width: 1200px;
+
     margin: 0 auto;
     padding: 0px;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+    }
 
 @media only screen and (max-width: 375px) {
     .container {
         width: 100%;
+        margin: 5px;
     }
 }
 
@@ -182,8 +184,8 @@ h3 {
 
 .car-container {
 /*    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 20px;/
-    display: flex; */
+    grid-gap: 20px;*/
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
