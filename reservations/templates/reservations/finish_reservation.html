@@ -1,6 +1,11 @@
 {% extends 'Base_app/base.html' %}
 {% load static %}
 {% block content %}
+<form method="get" action="{% url 'reservations:finish_reservation' reservation.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Fileter</button>
+</form>
 
 <h1>Wybierz samochód do kontynuacji rezerwacji</h1>
 

@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
+from cars.forms import CarFilterForm
 from cars.models import Car, CarClass
 from reservations.forms import CreateReservationForm
 
@@ -117,9 +118,33 @@ class FinishReservationWithFilters(UpdateView):
         available_cars = Car.objects.exclude(
             car_reservation__reservation_start_date__lte=reservation_end_date,
             car_reservation__reservation_end_date__gte=reservation_start_date)
-        car_classes = CarClass.objects.filter(id__in=available_cars.values_list('model__car_class', flat=True)).distinct()
+        form = CarFilterForm(request.GET)
 
-        context = {'reservation': reservation, 'available_cars': available_cars, 'car_classes':car_classes}
+        if form.is_valid():
+            model = form.cleaned_data.get('model')
+            if model:
+                available_cars = available_cars.filter(model=model)
+
+            fuel = form.cleaned_data.get('fuel')
+            if fuel:
+                available_cars = available_cars.filter(fuel=fuel)
+
+            engine_size = form.cleaned_data.get('engine_size')
+            if engine_size:
+                available_cars = available_cars.filter(engine_size=engine_size)
+
+            color = form.cleaned_data.get('color')
+            if color:
+                available_cars = available_cars.filter(color=color)
+
+            car_class = form.cleaned_data.get('car_class')
+            if car_class:
+                available_cars = available_cars.filter(model__car_class__in=car_class)
+        car_classes = CarClass.objects.filter(
+            id__in=available_cars.values_list('model__car_class', flat=True)).distinct()
+
+        context = {'reservation': reservation, 'available_cars': available_cars, 'car_classes': car_classes,
+                   'form': form}
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
@@ -131,6 +156,4 @@ class FinishReservationWithFilters(UpdateView):
             reservation.save()
             return redirect('reservations:your_reservations')
         else:
-            # Obsługa przypadku, gdy nie wybrano żadnego samochodu
-            # Możesz dodać odpowiednią obsługę, np. wyświetlenie komunikatu błędu
-            pass
+            return redirect('reservations:your_reservations')
