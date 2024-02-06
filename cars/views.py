@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView
+
+import cars.models
 from cars.models import Car, CarClass
 from cars.forms import CarFilterForm
 
@@ -63,8 +65,10 @@ class CarFilterView(View):
 
             car_class = form.cleaned_data.get('car_class')
             if car_class:
-                cars = cars.filter(model__car_class=car_class)
+                cars = cars.filter(model__car_class__in=car_class)
 
-        context = {'form': form, 'cars': cars}
+        car_classes = CarClass.objects.filter(id__in=cars.values_list('model__car_class', flat=True)).distinct()
+
+        context = {'form': form, 'cars': cars, 'car_classes': car_classes}
 
         return render(request, self.template_name, context)
