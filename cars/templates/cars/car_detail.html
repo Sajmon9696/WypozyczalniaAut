@@ -1,12 +1,50 @@
 {% extends 'Base_app/base.html' %}
-
+{% load static %}
 {% block content %}
 
+<div class="widget-carbig">
+    <!--
+    <div class="car-image2">
+                {% if car.pic %}
+                <img src="{{ car.pic.url }}" alt="Jedziesz jak gość!" width="80%">
+                {% else %}
+                <img src="{% static 'img/photographer.png' %}" alt="Zara Zosia zrobi" width="80%">
+                {% endif %}
+            </div>
+            <div class="car-details">
+                <h2>{{ car.model }}</h2>
+                <h2>{{ car.color.color_name }}</h2>
+                <p>Silnik: {{ car.engine_size }} {{ car.fuel }}</p>
+                <p>Klasa: {{ car.model.car_class }}</p>
+                <p>W przyszłości wraz z rozwojem strony i bazy danych powstałaby informacja odnośnie spalania, pojemności bagażnika itd. </p>
+                <p>Dostępność: </p>
+                <button>Zarezerwuj</button>
+            </div>
+-->
+
+                <table>
+                    <thead>
+                    <tr><th colspan="2"><h2>{{ car.model }}</h2></th></tr>
+                    </thead>
+                    <tbody>
+                    <tr><th>Silnik:</th><th>{{ car.engine_size }} {{ car.fuel }}</th></tr>
+                    <tr><th>Cena:</th><th>{{ car.model.price }} PLN/24h</th></tr>
+                    <tr><th>Spalanie:</th><th>Kogo to obchodzi?</th></tr>
+                    <tr><th>Wyposażenie dodatkowe:</th><th>Centralny zamek, poduszki powietrzne, bagażnik, schowek na piwo</th></tr>
+                    <tr><th colspan="2"><button>Zarezerwuj</button></th></tr>
+
+                    </tbody>
+
+                </table>
+
+</div>
+
+<!--
 {{car}}
 {{car.model}}
 {{car.engine}}
 {{car.color}}
 {{car.model.car_brand}}
-
+-->
 
 {% endblock %}
