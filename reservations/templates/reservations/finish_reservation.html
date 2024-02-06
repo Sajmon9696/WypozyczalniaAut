@@ -1,0 +1,40 @@
+{% extends 'Base_app/base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>Wybierz samochód do kontynuacji rezerwacji</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {% for car_class in car_classes %}
+    <div><h2>Klasa {{ car_class }}</h2></div>
+    <div class="class-container">
+        {% for car in available_cars %}
+        {% if car.model.car_class == car_class %}
+        <div class="widget-car">
+            <div class="car-image">
+                {% if car.pic %}
+                <img src="{{ car.pic.url }}" alt="Jedziesz jak gość!" width="330">
+                {% else %}
+                <img src="{% static 'img/photographer.png' %}" alt="Zara Zosia zrobi" width="330">
+                {% endif %}
+            </div>
+            <div class="car-details">
+                <h2>{{ car.model }}</h2>
+                <h2>{{ car.color.color_name }}</h2>
+                <p>Silnik: {{ car.engine_size }} {{ car.fuel }}</p>
+                <p>Klasa: {{ car.model.car_class }}</p>
+                <p>Dostępność: </p>
+                <input type="radio" id="car_{{ car.id }}" name="selected_car" value="{{ car.id }}">
+                <label for="car_{{ car.id }}">{{ car }}</label><br>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <button type="submit">Zarezerwuj samochód</button>
+    {% endfor %}
+</form>
+
+
+{% endblock %}

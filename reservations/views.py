@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
-from cars.models import Car
+from cars.models import Car, CarClass
 from reservations.forms import CreateReservationForm
 
 from reservations.models import Reservation
@@ -32,7 +32,7 @@ class CreateReservationView(CreateView):
                 return render(request, self.template_name, {'form': form, 'error': error})
             reservation.user = user
             reservation.save()
-            return redirect('reservations:continue_reservation', reservation.id)
+            return redirect('reservations:finish_reservation', reservation.id)
         return render(request, self.template_name, {'form': form})
 
 
@@ -103,3 +103,34 @@ class ReservationDeleteView(DeleteView):
     template_name = 'reservations/delete_reservation_form.html'
     context_object_name = 'reservation'
     success_url = reverse_lazy('reservations:your_reservations')
+
+
+class FinishReservationWithFilters(UpdateView):
+    model = Reservation
+    template_name = 'reservations/finish_reservation.html'
+
+    def get(self, request, *args, **kwargs):
+        reservation = self.get_object()
+        reservation_start_date = reservation.reservation_start_date
+        reservation_end_date = reservation.reservation_end_date
+
+        available_cars = Car.objects.exclude(
+            car_reservation__reservation_start_date__lte=reservation_end_date,
+            car_reservation__reservation_end_date__gte=reservation_start_date)
+        car_classes = CarClass.objects.filter(id__in=available_cars.values_list('model__car_class', flat=True)).distinct()
+
+        context = {'reservation': reservation, 'available_cars': available_cars, 'car_classes':car_classes}
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        reservation = self.get_object()
+        selected_car_id = request.POST.get('selected_car')
+        if selected_car_id:
+            selected_car = Car.objects.get(id=selected_car_id)
+            reservation.car = selected_car
+            reservation.save()
+            return redirect('reservations:your_reservations')
+        else:
+            # Obsługa przypadku, gdy nie wybrano żadnego samochodu
+            # Możesz dodać odpowiednią obsługę, np. wyświetlenie komunikatu błędu
+            pass
