@@ -15,8 +15,6 @@ class CarFilterForm(ModelForm):
         self.fields['fuel'].required = False
         self.fields['engine_size'].required = False
         self.fields['model'].required = False
-        self.fields['car_class'] = forms.MultipleChoiceField(
-            choices=[(price.id, price.car_class_name) for price in CarClass.objects.all()], required=False)
-
-
-
+        self.fields['car_class'] = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                                             choices=[(price.id, price.car_class_name) for price in
+                                                                      CarClass.objects.all()], required=False)
