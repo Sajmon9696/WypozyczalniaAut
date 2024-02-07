@@ -5,14 +5,8 @@
     <h2>Zaloguj by zlozyc rejestracje</h2>
     <form method="post" class="reservation-form">
         {% csrf_token %}
-        <label for="pickup-date">Login:</label>
-        {{ form.username }}
-
-
-        <label for="return-date">Password:</label>
-        {{ form.password }}
-
-        <button type="submit">Login</button>
+            {{ form.as_p }}
+        <button type="submit">Zaloguj</button>
     </form>
 </section>
 {% endblock %}

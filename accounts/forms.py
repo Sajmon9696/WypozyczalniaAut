@@ -5,12 +5,27 @@ from django import forms
 
 
 class MyLoginForm(AuthenticationForm):
-    username = forms.CharField()
-    password = forms.CharField()
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+        widgets = {
+            'username': forms.TextInput(),
+            'password': forms.PasswordInput(),
+        }
+        help_texts = {
+            'username': None,
+            'password': None,
+
+        }
 
 
 class MySignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2']
+        widgets = {
+            'username': forms.TextInput(),
+            'password1': forms.PasswordInput(),
+            'password2': forms.PasswordInput(),
+        }
 
