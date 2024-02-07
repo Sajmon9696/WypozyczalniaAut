@@ -6,8 +6,8 @@
 </section>
 <div class="car-container">
     {% for car_class in car_classes %}
-    <div><h2>Klasa {{ car_class }}</h2></div>
-    <div class="class-container">
+    <div class="car-container-title"><h2>Klasa {{ car_class }}</h2></div>
+    <div class="car-container-data">
         {% for car in cars %}
         {% if car.model.car_class == car_class %}
         <div class="widget-car">
@@ -30,6 +30,6 @@
         {% endif %}
         {% endfor %}
     </div>
-    {% endfor %}
+{% endfor %}
 </div>
 {% endblock %}
