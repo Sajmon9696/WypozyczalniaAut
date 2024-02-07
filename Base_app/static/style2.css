@@ -301,12 +301,15 @@ widget-carbig tr:nth-child(odd) {
 }
 
 .form-table button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
+    background-color: rgba(255, 215, 0, 0.6);
+    color: rgba(0, 0, 0, 0.6);
     padding: 10px 20px;
-    border: none;
     border-radius: 4px;
     cursor: pointer;
+    border: 3px solid rgba(166, 121, 53, 0.6);
+    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+    width: 350px;
+    margin: 5px;
 }
 
 .form-table td:nth-child(odd) {
