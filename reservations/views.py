@@ -36,7 +36,7 @@ class CreateReservationView(CreateView):
             return redirect('reservations:finish_reservation', reservation.id)
         return render(request, self.template_name, {'form': form})
 
-
+@method_decorator(login_required, name='dispatch')
 class ContinueReservation(UpdateView):
     model = Reservation
     template_name = 'reservations/continue_reservation.html'
@@ -75,7 +75,7 @@ class ReservationDetailView(DetailView):
     template_name = 'reservations/reservations_detail.html'
     context_object_name = 'reservation'
 
-
+@method_decorator(login_required, name='dispatch')
 class ReservationUpdateView(UpdateView):
     model = Reservation
     form_class = CreateReservationForm
@@ -105,7 +105,7 @@ class ReservationDeleteView(DeleteView):
     context_object_name = 'reservation'
     success_url = reverse_lazy('reservations:your_reservations')
 
-
+@method_decorator(login_required, name='dispatch')
 class FinishReservationWithFilters(UpdateView):
     model = Reservation
     template_name = 'reservations/finish_reservation.html'
