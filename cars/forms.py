@@ -17,3 +17,6 @@ class CarFilterForm(ModelForm):
         self.fields['model'].required = False
         self.fields['car_class'] = forms.MultipleChoiceField(
             choices=[(price.id, price.car_class_name) for price in CarClass.objects.all()], required=False)
+
+
+
