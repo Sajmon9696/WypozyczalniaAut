@@ -81,20 +81,20 @@ class ReservationUpdateView(UpdateView):
     form_class = CreateReservationForm
     template_name = 'reservations/create_reservation_form.html'
     context_object_name = 'form'
-    success_url = reverse_lazy('reservations:your_reservations')
 
     def post(self, request, *args, **kwargs):
         instance = self.get_object()
         form = self.form_class(request.POST, instance=instance)
         if form.is_valid():
             reservation = form.save(commit=False)
+            reservation.car = None
             if reservation.reservation_start_date < timezone.now().date() or \
                     reservation.reservation_end_date < timezone.now().date() or \
                     reservation.reservation_start_date > reservation.reservation_end_date:
                 error = "Podana Data Jest nieprawidlowa"
                 return render(request, self.template_name, {'form': form, 'error': error})
             reservation.save()
-            return redirect(self.success_url, pk=reservation.id)
+            return redirect('reservations:finish_reservation', pk=reservation.id)
         return render(request, self.template_name, {'form': form})
 
 
