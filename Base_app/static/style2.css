@@ -237,11 +237,11 @@ h3 {
     grid-gap: 20px; */
 }
 
-widget-carbig tr:nth-child(even) {
+.widget-carbig tr:nth-child(even) {
     background-color: rgba(166, 121, 120, 0.6) /* kolor z dupy */
 }
 
-widget-carbig tr:nth-child(odd) {
+.widget-carbig tr:nth-child(odd) {
     background-color: rgba(100, 100, 100, 0.6) /* kolor z dupy */
 }
 
@@ -285,6 +285,8 @@ widget-carbig tr:nth-child(odd) {
 
 .form-table {
     margin: 20px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
 }
 
 .form-table form {
@@ -318,4 +320,68 @@ widget-carbig tr:nth-child(odd) {
 
 .form-table td:nth-child(even) {
     text-align: left;
+}
+
+/* tabela rezerwacji */
+.reservation-table {
+    display: flex;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1 px;
+    margin: 0 auto;
+}
+
+.reservation-table thead {
+    background-color: rgba(255, 255, 0, 0.6);
+}
+
+.reservation-table th,
+.reservation-table td {
+    padding: 8px;
+    text-align: left;
+}
+
+.reservation-table tbody tr:nth-child(odd) {
+    background-color: rgba(255, 165, 0, 0.2);
+}
+
+.reservation-table th:nth-child(1),
+.reservation-table td:nth-child(1) {
+    width: 7%;
+}
+
+.reservation-table th:nth-child(2),
+.reservation-table td:nth-child(2) {
+    width: 30%;
+}
+
+.reservation-table th:nth-child(3),
+.reservation-table td:nth-child(3),
+.reservation-table th:nth-child(4),
+.reservation-table td:nth-child(4),
+.reservation-table th:nth-child(5),
+.reservation-table td:nth-child(5) {
+    width: 21%;
+}
+
+.reservation-table button[type="submit"] {
+    background-color: rgba(255, 215, 0, 0.6);
+    color: rgba(0, 0, 0, 0.6);
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 3px solid rgba(166, 121, 53, 0.6);
+    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+    width: 350px;
+    margin: 5px;
+}
+
+.reservation-table a {
+    text-decoration: none;
+    color: black;
+}
+
+.reservation-table a:hover {
+    text-decoration: underline;
+    color: gold;
 }

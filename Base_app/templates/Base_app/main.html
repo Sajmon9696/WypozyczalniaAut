@@ -17,7 +17,7 @@
 </section>
 {% else %}
 <section class="reservation-section">
-    <div class="car-coutainer-title"><h2>Zaloguj by zlozyc rejestracje</h2></div>
+    <div class="car-container-title"><h2>Zaloguj by zlozyc rejestracje</h2></div>
     <form action="{% url 'accounts:login' %}" method="post" class="reservation-form">
         {% csrf_token %}
         <label for="pickup-date">Login:</label>
