@@ -36,26 +36,6 @@ class CreateReservationView(CreateView):
             return redirect('reservations:finish_reservation', reservation.id)
         return render(request, self.template_name, {'form': form})
 
-@method_decorator(login_required, name='dispatch')
-class ContinueReservation(UpdateView):
-    model = Reservation
-    template_name = 'reservations/continue_reservation.html'
-    fields = ['car']
-    success_url = reverse_lazy('reservations:your_reservations')
-
-    def get_form(self, form_class=None):
-        form = super().get_form(form_class)
-        reservation = self.get_object()
-        reservation_start_date = reservation.reservation_start_date
-        reservation_end_date = reservation.reservation_end_date
-
-        available_cars = Car.objects.all()
-
-        form.fields['car'].queryset = available_cars.exclude(
-            car_reservation__reservation_start_date__lte=reservation_end_date,
-            car_reservation__reservation_end_date__gte=reservation_start_date)
-        return form
-
 
 @method_decorator(login_required, name='dispatch')
 class ReservationListView(ListView):
@@ -75,6 +55,7 @@ class ReservationDetailView(DetailView):
     template_name = 'reservations/reservations_detail.html'
     context_object_name = 'reservation'
 
+
 @method_decorator(login_required, name='dispatch')
 class ReservationUpdateView(UpdateView):
     model = Reservation
@@ -84,6 +65,7 @@ class ReservationUpdateView(UpdateView):
 
     def post(self, request, *args, **kwargs):
         instance = self.get_object()
+
         form = self.form_class(request.POST, instance=instance)
         if form.is_valid():
             reservation = form.save(commit=False)
@@ -104,6 +86,7 @@ class ReservationDeleteView(DeleteView):
     template_name = 'reservations/delete_reservation_form.html'
     context_object_name = 'reservation'
     success_url = reverse_lazy('reservations:your_reservations')
+
 
 @method_decorator(login_required, name='dispatch')
 class FinishReservationWithFilters(UpdateView):
@@ -156,4 +139,5 @@ class FinishReservationWithFilters(UpdateView):
             reservation.save()
             return redirect('reservations:your_reservations')
         else:
+            reservation.delete()
             return redirect('reservations:your_reservations')

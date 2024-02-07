@@ -3,25 +3,35 @@
 {% block content %}
 <div class="car-container-title"><h2>Twoje rezerwacje</h2></div>
 <div class="reservation-table">
-<table>
-    <thead>
-    <tr><td>LP</td><td>Samochód</td><td>Data początkowa</td><td>Data końcowa</td><td>Operacje</td>
-    </tr>
-    </thead>
-    <tbody>
-    {% for reservation in reservations %}
-    <tr>
-        <td>{{ reservation.id }}</td>
-        <td><a href="{% url 'cars:car_detail' reservation.car.id %}">{{ reservation.car }}</a></td>
-        <td>{{ reservation.reservation_start_date }}</td>
-        <td>{{ reservation.reservation_end_date }}</td>
-        <td>
-            <p><a href="{% url 'reservations:edit_reservation' reservation.id %}"><button>Zmień datę</button></a></p>
-            <p><a href="{% url 'reservations:delete_reservation' reservation.id %}"><button>Anuluj rezerwację</button></a></p>
-        </td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <table>
+        <thead>
+        <tr>
+            <td>LP</td>
+            <td>Samochód</td>
+            <td>Data początkowa</td>
+            <td>Data końcowa</td>
+            <td>Operacje</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation.id }}</td>
+            <td><a href="{% url 'cars:car_detail' reservation.car.id %}">{{ reservation.car }}</a></td>
+            <td>{{ reservation.reservation_start_date }}</td>
+            <td>{{ reservation.reservation_end_date }}</td>
+            <td>
+                <p><a href="{% url 'reservations:edit_reservation' reservation.id %}">
+                    <button>Zmień datę</button>
+                </a></p>
+                <p><a href="{% url 'reservations:delete_reservation' reservation.id %}">
+                    <button>Anuluj rezerwację</button>
+                </a></p>
+            </td>
+        </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
