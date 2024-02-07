@@ -166,10 +166,6 @@ h3 {
     transition: text-decoration 0.3s;
 }
 
-.googlemap {
-    display: flex;
-}
-
 .footer-content a,
 .widgetboxes a:hover,
 .widgetbox a:hover,
@@ -256,9 +252,14 @@ widget-carbig tr:nth-child(odd) {
     overflow: hidden;
 }
 
-.workspace {
+.map {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+}
+
+.googlemap {
+    width: 100%;
+    text-align: center;
 }
 
 .top-description {
