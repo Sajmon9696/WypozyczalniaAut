@@ -1,15 +1,6 @@
 {% extends 'Base_app/base.html' %}
 {% load static %}
 {% block content %}
-<!--
-<div class="form-carselector">
-<form method="get" action="{% url 'cars:filter_cars' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Fileter</button>
-</form></div>
--->
-
 <div class="form-table">
     <form method="get" action="{% url 'cars:filter_cars' %}">
         {% csrf_token %}
@@ -23,10 +14,14 @@
                 <td>Engine Size:</td><td>{{ form.engine_size }}</td>
             </tr>
             <tr>
-                <td>Klasa samochodu:</td><td>{{ form.car_class }}</td>
+                <td colspan="4" text-align="center"><div class="form-group">Wybierz klasy samochodów:
+                    {% for car_class in form.car_class %}
+                    {{ car_class.tag }} {{ car_class.choice_label }}
+                    {% endfor %}
+</div></td>
             </tr>
             <tr>
-                <td colspan="2" align="center"><button type="submit">Filter</button></td>
+                <td colspan="4" text-align="center"><button type="submit">Filter</button></td>
             </tr>
         </table>
     </form>

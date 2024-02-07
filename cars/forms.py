@@ -18,3 +18,4 @@ class CarFilterForm(ModelForm):
         self.fields['car_class'] = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
                                                              choices=[(price.id, price.car_class_name) for price in
                                                                       CarClass.objects.all()], required=False)
+#        self.fields['car_class'].widget.attrs.update({'style': 'display: inline-block;'})
