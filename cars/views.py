@@ -49,7 +49,7 @@ class CarFilterView(View):
         if form.is_valid():
             model = form.cleaned_data.get('model')
             if model:
-                cars = cars.filter(model=model)sa
+                cars = cars.filter(model=model)
 
             fuel = form.cleaned_data.get('fuel')
             if fuel:
