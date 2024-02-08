@@ -45,8 +45,8 @@
                 <h2>{{ car.color.color_name }}</h2>
                 <p>Silnik: {{ car.engine_size }} {{ car.fuel }}</p>
                 <p>Klasa: {{ car.model.car_class }}</p>
-                <p>Dostępność: </p>
-                <a href="{% url 'cars:car_detail' car.id %}">Sprawdź szczegóły</a>
+                <p>Cena: {{ car.model.price }} PLN/24</p>
+                <button type="submit"><a href="{% url 'cars:car_detail' car.id %}">Sprawdź szczegóły</a></button>
             </div>
         </div>
         {% endif %}
