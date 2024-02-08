@@ -49,23 +49,23 @@ class CarFilterView(View):
         if form.is_valid():
             model = form.cleaned_data.get('model')
             if model:
-                cars = cars.filter(model__in=model)
+                cars = cars.filter(model=model)sa
 
             fuel = form.cleaned_data.get('fuel')
             if fuel:
-                cars = cars.filter(fuel__in=fuel)
+                cars = cars.filter(fuel=fuel)
 
             engine_size = form.cleaned_data.get('engine_size')
             if engine_size:
-                cars = cars.filter(engine_size__in=engine_size)
+                cars = cars.filter(engine_size=engine_size)
 
             color = form.cleaned_data.get('color')
             if color:
-                cars = cars.filter(color__in=color)
+                cars = cars.filter(color=color)
 
             car_class = form.cleaned_data.get('car_class')
             if car_class:
-                cars = cars.filter(model__car_class__in=car_class)
+                cars = cars.filter(model__car_class=car_class)
 
         car_classes = CarClass.objects.filter(id__in=cars.values_list('model__car_class', flat=True)).distinct()
 
