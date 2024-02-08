@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.utils import timezone
@@ -11,6 +12,17 @@ from cars.models import Car, CarClass
 from reservations.forms import CreateReservationForm
 
 from reservations.models import Reservation
+
+
+def user_is_reservation_owner(function):
+    def wrap(request, *args, **kwargs):
+        reservation = Reservation.objects.get(pk=kwargs['pk'])
+        if reservation.user == request.user:
+            return function(request, *args, **kwargs)
+        else:
+            raise Http404("Brak dostępu do rezerwacji")
+
+    return wrap
 
 
 # Create your views here.
@@ -50,6 +62,7 @@ class ReservationListView(ListView):
 
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(user_is_reservation_owner, name='dispatch')
 class ReservationDetailView(DetailView):
     model = Reservation
     template_name = 'reservations/reservations_detail.html'
@@ -57,6 +70,7 @@ class ReservationDetailView(DetailView):
 
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(user_is_reservation_owner, name='dispatch')
 class ReservationUpdateView(UpdateView):
     model = Reservation
     form_class = CreateReservationForm
@@ -81,6 +95,7 @@ class ReservationUpdateView(UpdateView):
 
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(user_is_reservation_owner, name='dispatch')
 class ReservationDeleteView(DeleteView):
     model = Reservation
     template_name = 'reservations/delete_reservation_form.html'
@@ -89,6 +104,7 @@ class ReservationDeleteView(DeleteView):
 
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(user_is_reservation_owner, name='dispatch')
 class FinishReservationWithFilters(UpdateView):
     model = Reservation
     template_name = 'reservations/finish_reservation.html'
