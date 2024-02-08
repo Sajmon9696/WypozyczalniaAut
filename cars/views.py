@@ -65,7 +65,7 @@ class CarFilterView(View):
 
             car_class = form.cleaned_data.get('car_class')
             if car_class:
-                cars = cars.filter(model__car_class=car_class)
+                cars = cars.filter(model__car_class__in=car_class)
 
         car_classes = CarClass.objects.filter(id__in=cars.values_list('model__car_class', flat=True)).distinct()
 
